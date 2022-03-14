@@ -1,0 +1,5 @@
+spring 객체 생성이 언제 되냐면 xml파일 로딩시 자동으로 만들어진다.
+
+1. 객체는 xml파일 로딩시 생성된다.
+2. getBean() 호출시 생성 : lazy-init=true를 사용해야한다.
+3. getBean() 호출할 때마다 새로운 객체 생성 : scope="prototype" (lazy-init=true여야 한다.)
