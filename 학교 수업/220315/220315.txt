@@ -1,0 +1,30 @@
+DI(Dependency Injection 의존성 주입)
+
+bean에 삽입할 값이나 객체를 주입하는 것
+
+1. constructor DI
+    
+    <constructor-arg value=”” [type = index = ] />
+    
+    1) 우선순위 : String > double > int
+    
+    2) 제 타입에 맞는 생성자 실행하려면 type을 작성함
+    
+    3) index : 원하는 위치에 값 주입
+    
+    <constructor-arg ref= ..>
+    
+    <bean class=”주입할 객체 클래스” />
+    
+    <constructor-arg>
+    
+2. Setter DI (setter를 통한 주입)
+    
+    <prototype name=”” value=”” />
+    
+
+Java 변수
+
+기본형 : int, double, String, char : 변수에 실제 값이 들어감
+
+참조형 : array, object... : 변수에 실제 값이 들어있는 주소가 들어간다.
