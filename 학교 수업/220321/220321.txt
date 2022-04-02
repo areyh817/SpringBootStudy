@@ -1,0 +1,98 @@
+생성자 DI와 Setter DI 코드
+xml
+	<!-- TestBean의 t1객체 생성 -->
+	<!-- 생성자 DI -->
+	<bean id="data1" class="kr.hs.study.beans.DataBean"/>
+	<bean id="t2" class="kr.hs.study.beans.TestBean" lazy-init="true">
+		<constructor-arg value="10" type="int"/>
+		<constructor-arg value="11.11" type="double"/>
+		<constructor-arg value="Wacom" type="java.lang.String"/>
+		<constructor-arg ref="data1" index="3"/>
+		<constructor-arg ref="data1" index="4"/>
+	</bean>
+
+    <!-- Setter DI -->
+    <bean id="d1" class="kr.hs.study.beans.DataBean2"/>
+    <bean id="t1" class="kr.hs.study.beans.TestBean2">
+        <property name="data1" value="22"/>
+   		<property name="data2" value="22.22"/>
+   		<property name="data3" ref="d1"/>
+       	<property name="data4" ref="d1"/>
+    </bean>
+config.xml
+
+
+
+package kr.hs.study.main;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import kr.hs.study.beans.TestBean;
+import kr.hs.study.beans.TestBean2;
+
+public class MainClass {
+public static void main(String[] args) {
+
+	ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("kr/hs/study/config/config.xml");
+
+	// TestBean obj1 = ctx.getBean("t1", TestBean.class);
+
+	// 생성자 DI
+	TestBean obj2 = (TestBean)ctx.getBean("t2");
+	obj2.dataPrn();
+
+	System.out.println("==================================");
+
+	// Setter DI
+	TestBean2 obj1 = (TestBean2)ctx.getBean("t1");
+	System.out.println("data1 : " + obj1.getData1());
+	System.out.println("data2 : " + obj1.getData2());
+	System.out.println("data3 : " + obj1.getData3());
+	System.out.println("data4 : " + obj1.getData4());
+
+	}
+}
+
+MainClass.java
+
+
+
+자동주입
+
+**참조형 타입에만 적용가능(기본형에는 적용 안 됨)**
+
+**1) autowire=“byName”**
+
+멤버변수의 이름과 같은 bean을 찾아서 자동주입
+
+예) private DataBean data1; ← 내부적으로 setData1() 메서드가 실행되어서 주입됨
+
+**2) autowire=“byType”**
+
+멤버변수의 타입과 같은 bean을 찾아서 자동주입
+
+동일한 타입의 bean이 두 개 이상 있을 때는 오류발생
+
+**3) autowire=”constructor”**
+
+생성자의 매개변수와 타입이 같은 bean을 찾아서 자동주입
+
+동일한 타입의 bean이 두 개 이상 있을 때는 오류발생
+
+**DataBean3 / TestBean3**
+
+
+
+class TestBean3{
+	private DataBean data5;
+	private DataBean data6;
+	private DataBean data7;
+	
+}
+```
+
+```java
+<!-- testbean3 객체 -->
+     <bean id="d2" class="kr.hs.study.beans.DataBean3"/>
+     <bean id="t3" class="kr.hs.study.beans.TestBean3" autowire="constructor">
+```
