@@ -1,0 +1,10 @@
+1. 생성자 DI
+    1) 기본형 : <constructor-arg value= type= index= />
+    2)  참조형 : <constructor-arg ref= />
+    
+2. setter DI
+    1) 기본형 : <property name= value =/>
+    2) 참조형 : <property name= ref= />
+    name에 지정된 이름의 set메서드를 호출하여 실행하는 것
+    예) <property name=”age” value=”30”/>
+    setAge()라는 메서드를 호출해서 30을 세팅한다.
